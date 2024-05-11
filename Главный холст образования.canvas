@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"id":"42b731df6c5b2c6e","type":"file","file":"Список изучаемых направлений.md","x":-1480,"y":-320,"width":566,"height":280},
+		{"id":"39fee5e17a2af802","type":"file","file":"Методы самообразования.md","x":-1480,"y":0,"width":566,"height":300},
+		{"id":"d469da7783200a58","type":"file","file":"Приветствие.md","x":-1260,"y":-560,"width":346,"height":196,"color":"1"},
+		{"id":"bf9cb9a362422096","type":"file","file":"source/killerduck 1.png","x":-1480,"y":-560,"width":200,"height":196},
+		{"id":"f5817cf22d38e5dd","type":"text","text":"# Холсты направлений\n\n1. [Python холст](obsidian://open?vault=self-education&file=%D0%B1%D0%BB%D0%BE%D0%BA%20python%2FPython%20%D1%85%D0%BE%D0%BB%D1%81%D1%82.canvas)\n2. \n","x":-860,"y":-320,"width":360,"height":280}
+	],
+	"edges":[
+		{"id":"5fe72af494658e85","fromNode":"42b731df6c5b2c6e","fromSide":"right","toNode":"f5817cf22d38e5dd","toSide":"left"}
+	]
+}
