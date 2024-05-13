@@ -19,6 +19,10 @@ DELETE FROM {table_name}
 WHERE {delete_criteria}
 """
 
+template_select_query = """
+SELECT {columns} FORM {table_name}
+"""
+
 
 class DatabaseManager:
     connection = None
@@ -54,6 +58,24 @@ class DatabaseManager:
         delete_query = template_delete_data_from_table_query.format(table_name=table_name,
                                                                     delete_criteria=delete_criteria)
         self._execute(delete_query, tuple(criteria.values()))
+
+    def select_data(self, table_name, columns=None, criteria=None, order_by=None):
+        criteria = criteria or {}
+        columns = columns or ["*"]
+
+        query = template_select_query.format(table_name=table_name,
+                                             columns=", ".join(columns))
+
+        criteria_value = tuple(criteria.values())
+        if criteria:
+            placeholders = [f"{column} = ?" for column in criteria.keys()]
+            select_criteria = " AND ".join(placeholders)
+            query += f"WHERE {select_criteria}"
+
+        if order_by:
+            query += f"ORDER BY {order_by}"
+
+        self._execute(query, criteria_value)
 
     def __del__(self):
         self.connection.close()
