@@ -14,6 +14,11 @@ INSERT INTO {table_name}
 VALUES ({column_values});
 """
 
+template_delete_data_from_table_query = """
+DELETE FROM {table_name}
+WHERE {delete_criteria}
+"""
+
 
 class DatabaseManager:
     connection = None
@@ -42,6 +47,13 @@ class DatabaseManager:
                                                                 column_values=placeholders)
         column_values = tuple(data.values())
         self._execute(insert_table_query, column_values)
+
+    def delete_data_by_equal(self, table_name, criteria):
+        placeholders = [f"{column} = ?" for column in criteria.keys()]
+        delete_criteria = " AND ".join(placeholders)
+        delete_query = template_delete_data_from_table_query.format(table_name=table_name,
+                                                                    delete_criteria=delete_criteria)
+        self._execute(delete_query, tuple(criteria.values()))
 
     def __del__(self):
         self.connection.close()
