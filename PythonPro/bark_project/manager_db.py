@@ -8,6 +8,12 @@ CREATE TABLE IF NOT EXISTS {table_name}
 );
 """
 
+template_insert_table_query = """
+INSERT INTO {table_name}
+({column_names})
+VALUES ({column_values});
+"""
+
 
 class DatabaseManager:
     connection = None
@@ -27,6 +33,15 @@ class DatabaseManager:
         create_table_query = template_create_table_query.format(table_name=table_name,
                                                                 table_columns=string_columns)
         self._execute(create_table_query)
+
+    def insert_table(self, table_name, data):
+        column_names = ", ".join(data.keys())
+        placeholders = ", ".join("?"*len(data))
+        insert_table_query = template_insert_table_query.format(table_name=table_name,
+                                                                column_names=column_names,
+                                                                column_values=placeholders)
+        column_values = tuple(data.values())
+        self._execute(insert_table_query, column_values)
 
     def __del__(self):
         self.connection.close()
