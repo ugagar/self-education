@@ -22,3 +22,18 @@ class AddBookmarkCommand:
         data["date_added"] = datetime.utcnow().isoformat()
         db.insert_table(table_name="bookmarks", data=data)
         return "Successful added new bookmarks"
+
+
+class ListBookmarksCommand:
+
+    def __init__(self, criteria=None,order_by="date_added"):
+        self.order_by = order_by
+        self.criteria = criteria
+
+    def execute(self):
+        result = db.select_data(table_name="bookmarks",
+                                criteria=self.criteria,
+                                order_by=self.order_by)
+        return result.fetchall()
+
+
