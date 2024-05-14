@@ -75,7 +75,7 @@ class DatabaseManager:
         if order_by:
             query += f"ORDER BY {order_by}"
 
-        self._execute(query, criteria_value)
+        return self._execute(query, criteria_value)
 
     def __del__(self):
         self.connection.close()
