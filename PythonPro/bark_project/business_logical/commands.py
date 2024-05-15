@@ -25,7 +25,6 @@ class AddBookmarkCommand:
 
 
 class ListBookmarksCommand:
-
     def __init__(self, criteria=None,order_by="date_added"):
         self.order_by = order_by
         self.criteria = criteria
@@ -36,4 +35,11 @@ class ListBookmarksCommand:
                                 order_by=self.order_by)
         return result.fetchall()
 
+
+class DeleteBookmarkCommand:
+    @staticmethod
+    def execute(data):
+        db.delete_data_by_equal(table_name="bookmarks",
+                                criteria={id: data})
+        return "Bookmark delete"
 
