@@ -1,4 +1,4 @@
-import sys
+from sys import exit as sys_exit
 from datetime import datetime
 
 from ..manager_db import DatabaseManager
@@ -48,4 +48,4 @@ class DeleteBookmarkCommand:
 class QuitCommand:
     @staticmethod
     def execute():
-        sys.exit()
+        sys_exit()
