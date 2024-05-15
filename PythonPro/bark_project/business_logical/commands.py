@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 
 from ..manager_db import DatabaseManager
@@ -43,3 +44,8 @@ class DeleteBookmarkCommand:
                                 criteria={id: data})
         return "Bookmark delete"
 
+
+class QuitCommand:
+    @staticmethod
+    def execute():
+        sys.exit()
